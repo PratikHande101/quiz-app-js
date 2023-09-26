@@ -1,6 +1,11 @@
 let current_question = 0;
 let score = 0;
+const questionsList = document.getElementById('questions');
 const nextBtn = document.getElementById('nextBtn');
+const result = document.getElementById('result');
+const resultText = document.getElementById('result-text');
+const playBtn = document.getElementById('playBtn');
+
 
 const questions = {
     0 : {
@@ -8,8 +13,8 @@ const questions = {
         'option-1': "Shark",
         'option-2': "Blue Whale",
         'option-3': "Elephant",
-        'option-4': "Your mom",
-        'ans': "Your mom",
+        'option-4': "Giraffe",
+        'ans': "Giraffe",
     },
     1 : {
         'question-text': "Which is the smallest country in the world?",
@@ -38,7 +43,8 @@ const questions = {
 }
 
 function renderQuestion(questions, current_question) {
-    document.getElementById('questions').innerHTML = `
+    if (current_question < Object.keys(questions).length) {
+        questionsList.innerHTML = `
             <div id="${current_question+1}" class="question">
                 <span class="question-text">${current_question+1}. ${questions[current_question]['question-text']}</span>
                 <ul id="options">
@@ -49,6 +55,14 @@ function renderQuestion(questions, current_question) {
                 </ul>
             </div>
             `;
+    } else {
+        questionsList.innerHTML = '';
+        resultText.innerHTML = `
+            <span>You Scored ${score} out of ${Object.keys(questions).length}</span>
+        `;
+        result.style.display = 'block';
+        result.style.marginTop = '-20px';
+    }
 }
 
 window.addEventListener('Load', renderQuestion(questions, current_question));
@@ -56,11 +70,12 @@ window.addEventListener('Load', renderQuestion(questions, current_question));
 
 let flag = false;
 
-document.getElementById('questions').addEventListener('click', ev => {
+questionsList.addEventListener('click', ev => {
     if (!flag && ev.target.classList[0] == 'option') {
         flag = true;
         if (ev.target.textContent == questions[current_question]['ans']) {
             ev.target.classList.add("right-ans");
+            score += 1;
             nextBtn.style.display = 'block';
         } else {
             ev.target.classList.add("wrong-ans");
@@ -82,3 +97,14 @@ nextBtn.addEventListener('click', () => {
     current_question += 1;
     renderQuestion(questions, current_question);
 });
+
+playBtn.addEventListener('click', () => {
+    console.log("Play again clicked!");
+    current_question = 0;
+    score = 0;
+    flag = false;
+    nextBtn.style.display = 'none';
+    result.style.display = 'none';
+    renderQuestion(questions, current_question);
+})
+

@@ -10,16 +10,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main">
+    <div id="main">
         <h1>Simple Quiz</h1>
         <div id="quiz-container">
             <div id="questions">
 
             </div>
-            <button id="nextBtn" style="display: none;">Next</button>
+            <button class="button" id="nextBtn" style="display: none;">Next</button>
+        </div>
+        <div id="result" style="display: none;">
+            <span id="result-text"></span>
+            <button class="button" id="playBtn">Play Again</button>
         </div>
     </div>
-
     <script src="main.js"></script>
 </body>
 </html>

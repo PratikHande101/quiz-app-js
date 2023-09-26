@@ -12,7 +12,7 @@ body {
     background-color: #031E4C;
 }
 
-.main {
+#main {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -57,7 +57,7 @@ h1 {
     background-color: #FF9C92;
 }
 
-#nextBtn {
+.button {
     margin: 20px 50%;
     margin-bottom: -5px;
     transform: translate(-50%);
@@ -69,6 +69,6 @@ h1 {
     cursor: pointer;
 }
 
-#nextBtn:hover {
+.button:hover {
     background-color: #17438f;
 }
