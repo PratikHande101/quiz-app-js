@@ -14,7 +14,7 @@ const questions = {
         'option-2': "Blue Whale",
         'option-3': "Elephant",
         'option-4': "Giraffe",
-        'ans': "Giraffe",
+        'ans': "Blue Whale",
     },
     1 : {
         'question-text': "Which is the smallest country in the world?",
@@ -39,6 +39,14 @@ const questions = {
         'option-3': "Arctic",
         'option-4': "Africa",
         'ans': "Australia",
+    },
+    4 : {
+        'question-text': "How many days do we have in a week?",
+        'option-1': "7",
+        'option-2': "9",
+        'option-3': "10",
+        'option-4': "8",
+        'ans': "7",
     },
 }
 
