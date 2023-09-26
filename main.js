@@ -1,5 +1,6 @@
 let current_question = 0;
 let score = 0;
+const nextBtn = document.getElementById('nextBtn');
 
 const questions = {
     0 : {
@@ -16,7 +17,7 @@ const questions = {
         'option-2': "Bhutan",
         'option-3': "Nepal",
         'option-4': "Shri Lanka",
-        'ans': "option-1",
+        'ans': "Vatican City",
     },
     2 : {
         'question-text': "Which is the largest desert in the world?",
@@ -24,7 +25,7 @@ const questions = {
         'option-2': "Gabi",
         'option-3': "Sahara",
         'option-4': "Antarctica",
-        'ans': "option-3",
+        'ans': "Sahara",
     },
     3 : {
         'question-text': "Which is the smallest continent in the world?",
@@ -32,12 +33,12 @@ const questions = {
         'option-2': "Australia",
         'option-3': "Arctic",
         'option-4': "Africa",
-        'ans': "option-2",
+        'ans': "Australia",
     },
 }
 
 function renderQuestion(questions, current_question) {
-    document.getElementById('questions').innerHTML += `
+    document.getElementById('questions').innerHTML = `
             <div id="${current_question+1}" class="question">
                 <span class="question-text">${current_question+1}. ${questions[current_question]['question-text']}</span>
                 <ul id="options">
@@ -56,22 +57,28 @@ window.addEventListener('Load', renderQuestion(questions, current_question));
 let flag = false;
 
 document.getElementById('questions').addEventListener('click', ev => {
-    if (!flag) {
+    if (!flag && ev.target.classList[0] == 'option') {
         flag = true;
         if (ev.target.textContent == questions[current_question]['ans']) {
             ev.target.classList.add("right-ans");
-            document.getElementById('nextBtn').style.display = 'block';
+            nextBtn.style.display = 'block';
         } else {
             ev.target.classList.add("wrong-ans");
             const ul = document.getElementById('options');
-
             for (let i = 0; i < Object.keys(ul.children).length; i++) {
                 if (ul.children[i].textContent == questions[current_question]['ans']) {
                     ul.children[i].classList.add('right-ans');
                 }
             }
 
-            document.getElementById('nextBtn').style.display = 'block';
+            nextBtn.style.display = 'block';
         }
     }
-})
+});
+
+nextBtn.addEventListener('click', () => {
+    nextBtn.style.display = 'none';
+    flag = false;
+    current_question += 1;
+    renderQuestion(questions, current_question);
+});
